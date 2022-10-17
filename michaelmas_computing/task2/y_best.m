@@ -1,0 +1,1 @@
+y_best = fminsearch(@(y) rugby_conversion(10,y), 9)
