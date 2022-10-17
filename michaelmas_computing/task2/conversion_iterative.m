@@ -6,6 +6,8 @@ function best_iterative = conversion_iterative(~)
     end
     x1 = [0:0.1:best_iterative(101)];
     y1 = x1;
-    plot(x,best_iterative,x1,y1,'r');
+    plot(x,best_iterative,x1,y1, 'r');
+    xlabel('x / m')
+    ylabel('max theta / theta')
+    legend('Iterative Theta', 'Y=x plot')
 end
-
