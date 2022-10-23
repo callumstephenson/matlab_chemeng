@@ -42,7 +42,18 @@ y_thirteen = adjusted_pressure(thirteen_volt_m2, theta_vals, thirteen_volt_m1);
 y_ten = adjusted_pressure(ten_volt_m2, theta_vals, ten_volt_m1);
 y_seven = adjusted_pressure(seven_volt_m2, theta_vals, seven_volt_m1);
 
-plot(theta_vals, y_thirteen, theta_vals, y_ten, theta_vals, y_seven);
-xlabel("Angle / degrees");
-ylabel("Dimensionless pressure");
-legend("13 V Curve","10 V Curve","7 V Curve");
+vertical_y = linspace(-0.5, 2, 101);
+vertical_x = [];
+for i = 1:length(vertical_y)
+    vertical_x(i) = pi;
+end
+
+for i = 1:length(theta_vals)
+    theta_vals_rads(i) = theta_vals(i)*pi / 180;
+end
+
+graph1 = plot(theta_vals_rads, y_thirteen, "k--", theta_vals_rads, y_ten, "k:", theta_vals_rads, y_seven, "k-.", vertical_x, vertical_y, '--');
+set(graph1,'LineWidth',1.5);
+xlabel("Angle / Rad");
+ylabel("Dimensionless pressure [P2 - P1 / Pa - P1] cos \theta");
+legend("13 V Data","10 V Data","7 V Data");
