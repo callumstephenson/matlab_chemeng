@@ -52,8 +52,23 @@ for i = 1:length(theta_vals)
     theta_vals_rads(i) = theta_vals(i)*pi / 180;
 end
 
-graph1 = plot(theta_vals_rads, y_thirteen, "k--", theta_vals_rads, y_ten, "k:", theta_vals_rads, y_seven, "k-.", vertical_x, vertical_y, '--');
+
+graph1 = plot(theta_vals_rads, y_thirteen, "k--", theta_vals_rads, y_ten, "k:", theta_vals_rads, y_seven, "k-.");
 set(graph1,'LineWidth',1.5);
 xlabel("Angle / Rad");
 ylabel("Dimensionless pressure [P2 - P1 / Pa - P1] cos \theta");
 legend("13 V Data","10 V Data","7 V Data");
+
+% form fitting
+
+fit_13v = fit(theta_vals_rads(:), y_thirteen(:), 'Poly4');
+fit_10v = fit(theta_vals_rads(:), y_ten(:), 'Poly4');
+fit_7v = fit(theta_vals_rads(:), y_seven(:), 'Poly4');
+
+fun_13v = @(x) 0.02098*x.^4 - 0.2643*x.^3 + 1.11*x.^2 - 1.734*x + 0.9088;
+fun_10v = @(x) 0.02237*x.^4 - 0.2843*x.^3 + 1.229*x.^2 -2.025*x + 1.09;
+fun_7v = @(x) 0.01933*x.^4 - 0.2483*x.^3 + 1.209*x.^2 - 2.56*x + 1.821;
+
+int_13v = integral(fun_13v, 0, pi)
+fit_10v = integral(fun_10v, 0, pi)
+fit_7v = integral(fun_7v, 0, pi)
