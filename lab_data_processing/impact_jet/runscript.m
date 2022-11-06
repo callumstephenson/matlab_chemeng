@@ -39,10 +39,29 @@ vsq_120_err = square_error_calc(vsq_120, v_err_120);
 vsq_90_err = square_error_calc(vsq_90, v_err_90);
 
 % plotting , force, theoretical_170
-plot(force, vsq_170, 'kx');
-errorbar(force, vsq_170, vsq_170_err / 2, vsq_170_err / 2, force_err / 2, force_err / 2)
-%xlabel("Force Applied / N");
-%ylabel("Volumetric Flowrate ^2, M^6.S^-2");
-%legend("170 Degree Data", "Theoretical Values");
-%plot(force(1:7), vsq_120, 'kx-', force(1:7), theoretical_120)
-%plot(force(1:6), vsq_90, 'kx-', force(1:6), theoretical_90)
+plot(force, vsq_170, force, theoretical_170);
+e = errorbar(force, vsq_170, vsq_170_err / 2, vsq_170_err / 2, force_err / 2, force_err / 2, 'kx');
+e.LineStyle = 'none';
+xlabel("Force Applied / N");
+ylabel("Volumetric Flowrate ^2 / M^6.S^-2");
+hold on
+plot(force, theoretical_170);
+legend("170 Degree Data", "Theoretical Values");
+hold off
+plot(force(1:7), vsq_120, force(1:7), theoretical_120);
+e = errorbar(force(1:7), vsq_120, vsq_120_err / 2, vsq_120_err / 2, force_err(1:7) / 2, force_err(1:7) / 2, 'kx');
+e.LineStyle = 'none';
+xlabel("Force Applied / N");
+ylabel("Volumetric Flowrate ^2 / M^6.S^-2");
+hold on
+plot(force(1:7), theoretical_120);
+legend("120 Degree Data", "Theoretical Values");
+hold off
+plot(force(1:6), vsq_90);
+e = errorbar(force(1:6), vsq_90, vsq_90_err / 2, vsq_90_err / 2, force_err(1:6) / 2, force_err(1:6) / 2, 'kx');
+e.LineStyle = 'none';
+xlabel("Force Applied / N");
+ylabel("Volumetric Flowrate ^2 / M^6.S^-2");
+hold on
+plot(force(1:6), theoretical_90);
+legend('90 Degree Data', 'Theoretical Values');
