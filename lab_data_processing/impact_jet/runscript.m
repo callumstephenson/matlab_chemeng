@@ -32,7 +32,7 @@ v_err_170 = linear_error_calc(sqrt(vsq_170), deflector_170_vol, 0.1);
 v_err_120 = linear_error_calc(sqrt(vsq_120), deflector_120_vol, 0.1);
 v_err_90 = linear_error_calc(sqrt(vsq_90), deflector_90_vol, 0.1);
 
-force_err = linear_error_calc(force, (force / 9.81), 0.00098);
+force_err = linear_error_calc(force, (force / 9.81), 0.0001);
 
 vsq_170_err = square_error_calc(vsq_170, v_err_170);
 vsq_120_err = square_error_calc(vsq_120, v_err_120);
