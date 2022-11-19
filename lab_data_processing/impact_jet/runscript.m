@@ -1,4 +1,4 @@
-%data
+% raw data
 mass_cumulative = [99.7, 99.1, 99.5, 99.2, 99.0, 99.4, 99.6, 99.2] / 1000;
 
 deflector_170_vol = [10, 10, 10, 15, 15, 20, 20, 20];
@@ -65,3 +65,25 @@ ylabel("Volumetric Flowrate ^2 / M^6.S^-2");
 hold on
 plot(force(1:6), theoretical_90);
 legend('90 Degree Data', 'Theoretical Values');
+hold off
+
+% lin reg
+force_120 = force(1:7);
+force_90 = force(1:6);
+b1 = 1 / (vsq_170(:) \ force(:));
+b2 = 1 / (vsq_120(:) \ force_120(:));
+b3 = 1 / (vsq_90(:) \ force_90(:));
+
+
+b1_th = 1 / (theoretical_170(:) \ force(:));
+b2_th = 1 / (theoretical_120(:) \ force_120(:));
+b3_th = 1 / (theoretical_90(:) \ force_90(:));
+
+% lin reg diff percentage
+b1_diff = abs((b1_th - b1) / b1) * 100;
+b2_diff = abs((b2_th - b2) / b2) * 100;
+b3_diff = abs((b3_th - b3) / b3) * 100;
+
+disp(b1_diff);
+disp(b2_diff);
+disp(b3_diff);
